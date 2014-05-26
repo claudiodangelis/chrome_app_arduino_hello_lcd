@@ -1,0 +1,6 @@
+name: chrome_app_arduino_hello_lcd
+description: A sample Chrome packaged application
+dependencies:
+  chrome: any
+transformers:
+- chrome
