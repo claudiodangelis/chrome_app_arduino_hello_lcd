@@ -1,11 +1,25 @@
 import 'dart:html';
 import 'package:chrome/chrome_app.dart' as chrome;
 
+final int MAX_LENGTH = 32;
+
+InputElement input = querySelector('#txt');
+SpanElement charLeft = querySelector('#left');
+ButtonElement btn = querySelector('#btn');
+
 void main() {
+
+  // Sets input.maxLength to `MAX_LENGTH' and shows the count of remaining
+  // characters.
+  input
+    ..maxLength = MAX_LENGTH
+    ..onKeyUp.listen((e) {
+      charLeft.text = (MAX_LENGTH - input.value.length).toString();
+    });
+
   // Registers a callback to `onClick` event of DOM element with id 'btn'
-  querySelector('#btn').onClick.listen((e) {
+  btn.onClick.listen((e) {
     // Selects the InputElement with id 'txt'
-    InputElement input =  querySelector('#txt');
     // Gets all connected devices, returns information about found devices
     chrome.serial.getDevices().then((List<chrome.DeviceInfo> ports) {
       // Loops thru all found devices
